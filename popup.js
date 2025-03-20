@@ -14,14 +14,27 @@ function displaySummary(summary) {
     loadingDiv.style.display = 'none';
     summaryContainer.style.display = 'block';
     errorMessageDiv.style.display = 'none';
-    summaryListDiv.innerHTML = ""; // Clear existing content
+    summaryListDiv.innerHTML = "";
 
     console.log("Raw Summary from API:", summary); // Debugging log: Raw summary
 
-    // Refined parsing for single topic and description - more flexible whitespace handling
-    const parts = summary.split(/Main Topic:\s*([\s\S]+?)\nDetailed Description:\s*([\s\S]+)/);
+    // Parsing for Markdown bold labels and more flexible whitespace
+    const parts = summary.split(/\*\*Main Topic:\*\*\s*([\s\S]+?)\*\*Detailed Description:\*\*\s*([\s\S]+)/);
+    // Regular expression explanation (Markdown and whitespace robust):
+    ///\*\*Main Topic:\*\*\s*([\s\S]+?)\*\*Detailed Description:\*\*\s*([\s\S]+)/
+    // \*\*Main Topic:\*\*     Matches "**Main Topic:**" literally (Markdown bold).
+    // \s*                   Matches zero or more whitespace characters.
+    // ([\s\S]+?)            Captures the topic title (any character, one or more times, non-greedy). (Group 1)
+    // \*\*Detailed Description:\*\* Matches "**Detailed Description:**" literally (Markdown bold).
+    // \s*                   Matches zero or more whitespace characters.
+    // ([\s\S]+)             Captures the description (any character, one or more times, greedy). (Group 2)
 
-    if (parts.length >= 3) {
+
+    console.log("Parsed parts array:", parts); // Debugging log: Parsed parts array
+    console.log("Parts array length:", parts.length); // Debugging log: Parts array length
+
+
+    if (parts.length >= 3) { // Check if split produced at least 3 parts (whole match, topic, description)
         let mainTopicTitle = parts[1];
         let detailedDescription = parts[2];
 
@@ -44,15 +57,14 @@ function displaySummary(summary) {
             topicItem.appendChild(titleElement);
             topicItem.appendChild(descriptionElement);
             summaryListDiv.appendChild(topicItem);
-        
         } else {
             console.warn("Warning: Topic title or description is missing after parsing.");
             summaryListDiv.textContent = "Warning: Incomplete summary from API. Raw summary:\n" + summary; // Show warning in UI
         }
 
     } else {
-        // Parsing failed, display raw summary or error
-        summaryListDiv.textContent = "Error parsing summary. Raw summary:\n" + summary;
+        // Parsing failed, display raw summary - display raw summary even if parsing fails, as content is present
+        summaryListDiv.textContent = "Warning: Summary format might not be perfectly parsed. Raw summary:\n" + summary; // More informative warning
     }
 }
 

@@ -1,3 +1,4 @@
+import { GEMINI_API_KEY } from './config.js'; // Import API Key from config.js
 
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent'; // Example Gemini Pro endpoint
 
@@ -36,10 +37,10 @@ async function generateSummary(textContent) {
   const requestBody = {
     "contents": [{
       "parts": [{
-        "text": `Summarize this text into a list of 5 key topics. For each topic, provide a concise title and a detailed description. Format each topic as:
+        "text": `Summarize the following text by identifying the main topic and providing a detailed description of that topic. Format the summary as:
 
-Topic [Number]: [Topic Title]
-[Detailed Description of the topic]
+Main Topic: [Main Topic Title]
+Detailed Description: [Detailed Description of the main topic]
 
 Text to summarize:
 ${textContent}`

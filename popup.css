@@ -1,0 +1,169 @@
+/* CSS Variables for Light and Dark Mode */
+:root {
+    --bg-color: #f8f9fa; /* Light mode background */
+    --text-color: #212121; /* Light mode text */
+    --surface-color: #fff; /* Light mode surface (containers) */
+    --primary-color: #3f51b5; /* Primary color (Indigo 500) */
+    --secondary-text-color: #757575; /* Light mode secondary text */
+    --error-color: #f44336; /* Error color (Red 500) */
+    --error-bg-color: #ffebee; /* Light red background for error */
+    --summary-bg-color: #f9f9f9; /* Light mode summary area background */
+    --summary-border-color: #ddd; /* Light mode summary area border */
+  }
+  
+  /* Dark Mode Theme */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg-color: #121212; /* Dark mode background (Material Dark Grey 900) */
+      --text-color: #fff; /* Dark mode text (White) */
+      --surface-color: #303030; /* Dark mode surface (Material Dark Grey 800) */
+      --primary-color: #90caf9; /* Dark mode Primary color (Blue 300 - lighter for dark theme) */
+      --secondary-text-color: #9e9e9e; /* Dark mode secondary text (Grey 500) */
+      --error-color: #ef9a9a; /* Dark mode error color (Red 200 - lighter for dark theme) */
+      --error-bg-color: #422020; /* Dark red background for error in dark mode */
+      --summary-bg-color: #424242; /* Dark mode summary area background (Material Dark Grey 700) */
+      --summary-border-color: #555; /* Dark mode summary area border */
+    }
+  }
+  
+  body {
+    width: 320px; /* Base width - can adjust if needed */
+    padding: 15px; /* Slightly reduced base padding */
+    font-family: 'Roboto', 'Noto Sans', sans-serif;
+    color: var(--text-color); /* Use CSS variable for text color */
+    background-color: var(--bg-color); /* Use CSS variable for background color */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 16px; /* Base font size in px - for rem calculations */
+  }
+  
+  h1 {
+    font-size: 1.5rem; /* Using rem units now */
+    font-weight: 500;
+    margin-bottom: 1rem; /* Using rem units for margins too */
+    color: var(--primary-color); /* Use CSS variable for primary color */
+  }
+  
+  #loading {
+    display: none;
+    margin-bottom: 1rem;
+    font-style: italic;
+    color: var(--secondary-text-color); /* Use CSS variable for secondary text color */
+  }
+  
+  #summary-container {
+    padding: 1.5rem; /* Using rem units for padding */
+    border-radius: 0.75rem; /* Using rem units for border-radius */
+    background-color: var(--surface-color); /* Use CSS variable for surface color */
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); /* Using rem units for shadow offsets */
+    margin-bottom: 1rem;
+    border: 1px solid var(--summary-border-color); /* Border color using variable */
+    background-color: var(--summary-bg-color); /* Background using variable */
+  }
+  
+  #summary-list {
+    white-space: normal;
+  }
+  
+  .topic-item {
+    margin-bottom: 1.25rem; /* Using rem units for spacing */
+  }
+  
+  .topic-title {
+    font-weight: bold;
+    margin-bottom: 0.5rem; /* Using rem units for margins */
+    color: var(--primary-color); /* Use primary color variable for topic titles */
+    font-size: 1.1rem; /* Using rem units */
+  }
+  
+  .topic-description {
+    font-size: 1rem; /* Using rem units */
+    line-height: 1.6;
+    color: var(--text-color); /* Use text color variable */
+  }
+  
+  .keyword {
+    font-weight: bold;
+    color: var(--primary-color); /* Use primary color for keywords */
+  }
+  
+  #error-message {
+    color: var(--error-color); /* Use error color variable */
+    display: none;
+    margin-top: 0.625rem; /* Using rem units for margins */
+    padding: 1rem; /* Using rem units for padding */
+    background-color: var(--error-bg-color); /* Use error background color variable */
+    border-radius: 0.75rem; /* Using rem units for border-radius */
+    font-size: 0.9rem; /* Using rem units for error message font */
+    border: 1px solid var(--error-color); /* Error border color */
+  }
+  
+  /* Media Queries for Responsiveness */
+  
+  /* For slightly smaller screens (e.g., narrow side panels) */
+  @media (max-width: 350px) {
+    body {
+      width: 280px; /* Reduce body width */
+      padding: 10px; /* Reduce padding */
+      font-size: 15px; /* Slightly smaller base font size */
+    }
+    h1 {
+      font-size: 1.3rem; /* Smaller heading */
+      margin-bottom: 0.8rem;
+    }
+    #summary-container {
+      padding: 1rem; /* Reduced container padding */
+      margin-bottom: 0.8rem;
+    }
+    .topic-item {
+      margin-bottom: 1rem; /* Reduced topic spacing */
+    }
+    .topic-title {
+      font-size: 1rem; /* Smaller topic titles */
+      margin-bottom: 0.4rem;
+    }
+    .topic-description {
+      font-size: 0.95rem; /* Smaller description text */
+    }
+    #error-message {
+      padding: 0.8rem; /* Reduced error message padding */
+      font-size: 0.85rem; /* Smaller error message font */
+    }
+  }
+  
+  /* For larger screens (if side panel width is somehow increased or on high-resolution displays) */
+  @media (min-width: 400px) {
+    body {
+      font-size: 17px; /* Slightly larger base font size */
+    }
+    h1 {
+      font-size: 1.7rem; /* Larger heading */
+      margin-bottom: 1.2rem;
+    }
+    #summary-container {
+      padding: 2rem; /* Increased container padding */
+      border-radius: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .topic-item {
+      margin-bottom: 1.5rem; /* Increased topic spacing */
+    }
+    .topic-title {
+      font-size: 1.2rem; /* Larger topic titles */
+      margin-bottom: 0.6rem;
+    }
+    .topic-description {
+      font-size: 1.1rem; /* Larger description text */
+      line-height: 1.8; /* Slightly increased line height */
+    }
+    #error-message {
+      padding: 1.2rem; /* Increased error message padding */
+      font-size: 1rem; /* Larger error message font */
+    }
+  }
+  
+  /* Modern Styling - Subtle hover effect (same as before) */
+  #summary-container:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.2s ease-in-out;
+  }
